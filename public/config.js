@@ -16,7 +16,7 @@ window.cors = false; //true
 
 /*---- HTTPS -----*/
 /* If streams are using an ssl protol change this box on true.*/
-window.https = false;  //true;
+window.https = true;  //true;
 
 /*----- TMDB API [OPTIONAL] -----*/
 /* By default player will use movie info from the provider. In case these info are missing it will be used tmdb as alternative
