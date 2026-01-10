@@ -1,5 +1,5 @@
 /*----- Player name -----*/
-window.playername = "IPTVEditor Web Player";
+window.playername = "•RaDiX• Web Player";
 
 /*----- DNS -----*/
 //Iptv provider dns url (for example "http://domain.com:80")
