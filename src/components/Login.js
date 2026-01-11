@@ -1,3 +1,14 @@
+/**
+ * Login. js - SMIPTV Web Player Login Component
+ * 
+ * Description: Beautiful modern login page with animated gradient backgrounds,
+ *              glassmorphism effects, and smooth animations. 
+ * 
+ * Repository: irlam/webplayer
+ * Created: 11/01/2026 (UK format:  DD/MM/YYYY)
+ * Last Modified: 11/01/2026 - Fixed infinite redirect loop
+ */
+
 import React, {useState,useRef,useEffect} from 'react'
 import styled, { keyframes } from 'styled-components';
 import {useHistory} from "react-router-dom";
@@ -21,7 +32,7 @@ const gradientAnimation = keyframes`
 // Float animation for the card
 const floatAnimation = keyframes`
     0%, 100% {
-        transform: translateY(0px);
+        transform:  translateY(0px);
     }
     50% {
         transform: translateY(-10px);
@@ -139,7 +150,7 @@ const LogoContainer = styled.div`
         }
     }
 
-    @media (max-width:  768px) {
+    @media (max-width: 768px) {
         img {
             max-width: 80%;
             max-height: 100px;
@@ -153,7 +164,7 @@ const Input = styled.input`
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: white ! important;
     padding: 0.85rem 1.2rem;
-    border-radius:  12px;
+    border-radius: 12px;
     font-size: 1rem;
     transition: all 0.3s ease;
     width: 100%;
@@ -197,7 +208,7 @@ const Button = styled.button`
     }
 
     &:active {
-        transform: translateY(0px);
+        transform:  translateY(0px);
         box-shadow: 0 2px 10px rgba(139, 92, 246, 0.4);
     }
 
@@ -227,7 +238,7 @@ const Login = ({url}) => {
         if(auth.isAuth())
             history.push(url||"/")
         else auth.authLogin(()=>history.push(url||"/"))
-    },[auth,history,url]);
+    },[auth,history]);
 
     useEffect(()=>{
         m3u8 ?  setBlur({filter:"blur(. 3rem)"}) : setBlur({});
@@ -237,7 +248,7 @@ const Login = ({url}) => {
 
     const remoteController = (event) => {
         let active = document.activeElement;
-        if (event.keyCode === 40 && active.nextSibling) {
+        if (event.keyCode === 40 && active. nextSibling) {
             if(active.nextSibling.tagName==="LABEL")
                 active = active.nextSibling;
             active.nextSibling.focus();
@@ -252,7 +263,7 @@ const Login = ({url}) => {
     const login = (e) =>{
         e.preventDefault();
         setBlur({filter:"blur(.3rem)"})
-        auth.signin(dns ,username,password,
+        auth.signin(dns,username,password,
             () => window.location="/"
             ,
             (title,description) => {
@@ -329,7 +340,7 @@ const Login = ({url}) => {
         </Container>
         {showPopup && <Popup unsecure={true} title={showPopup.title} description={showPopup.description} icon={"fas fa-user-times"} onclick={closePopup}/>}
         {m3u8 && (
-            <Popup unsecure={true} error={false} title={"Information"} description={"To login use your IPTV playlist username and password, not your email. <br/>Web Player can play live channels streams only in M3U8 format. <br/>The conversion will be done automatically if streams are in Xtreamcodes format (this won't affect your playlist)."} icon={"fas fa-info-circle"} onclick={()=> {Cookies.set("m3u8_play",1,{ expires:  365 }); setM3u8(! m3u8);}}/>
+            <Popup unsecure={true} error={false} title={"Information"} description={"To login use your IPTV playlist username and password, not your email. <br/>Web Player can play live channels streams only in M3U8 format. <br/>The conversion will be done automatically if streams are in Xtreamcodes format (this won't affect your playlist)."} icon={"fas fa-info-circle"} onclick={()=> {Cookies.set("m3u8_play",1,{ expires: 365 }); setM3u8(! m3u8);}}/>
         )}
         </>
     )
