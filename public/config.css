@@ -1,6 +1,33 @@
-:root{
-    --second-color: #ec1650; /*use colors easily readable on white background*/
-    --second-color-shadow: #ec165008; 
-    --first-color: #171c22;
-  }
-  
+/**
+ * config.css - Streamity Player Custom Styling
+ * 
+ * Description: Custom color scheme and branding for the IPTV player. 
+ *              Change these values to customize the look of your player.
+ * 
+ * Repository: irlam/webplayer
+ * Created: 11/01/2026 (UK format: DD/MM/YYYY)
+ */
+
+:root {
+    --main-color: #667eea;
+    --accent-color: #764ba2;
+}
+
+.main-color {
+    color: var(--main-color) !important;
+}
+
+.main-bg {
+    background: linear-gradient(135deg, var(--main-color) 0%, var(--accent-color) 100%) !important;
+}
+
+button.primary, .btn-primary {
+    background: linear-gradient(135deg, var(--main-color) 0%, var(--accent-color) 100%) !important;
+    border: none !important;
+}
+
+button.primary:hover, .btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}

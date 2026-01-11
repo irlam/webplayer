@@ -1,92 +1,131 @@
 ---
 ###############################################################################
-# . cpanel.yml - cPanel Deployment Configuration File
+# .cpanel.yml - cPanel Deployment Configuration File
 # 
-# Description: This file automates the deployment of the webplayer React app
-#              to cPanel hosting.  It builds the React application and deploys
-#              the static files to the public_html directory.
+# Description:  Automates deployment of Streamity IPTV Web Player to cPanel. 
+#              Builds the React application and deploys static files plus
+#              PHP backend to public_html root directory.
 #
 # Repository: irlam/webplayer
-# Application:  IPTV Editor Player (React Application)
-# Created: 10/01/2026
-# Format: UK date format (DD/MM/YYYY)
+# Application: Streamity.tv v2 Xtream IPTV Player
+# Created: 10/01/2026 (UK format: DD/MM/YYYY)
+# Updated: 11/01/2026 - Fixed file paths and deployment structure
 #
 # How it works:
-# 1. Installs Node.js dependencies using npm
+# 1. Installs Node.js dependencies
 # 2. Builds the React application for production
-# 3. Copies the built files to the web server's public directory
-# 4. Cleans up unnecessary files to save space
-#
-# Note:  Ensure your cPanel account has Node.js enabled and sufficient resources
+# 3. Deploys built files to public_html ROOT (not subfolder)
+# 4. Copies PHP backend files
+# 5. Sets up error logging
 ###############################################################################
 
 deployment:
   tasks:
-    # Task 1: Install Node.js dependencies
-    # This downloads and installs all required packages listed in package.json
-    - export DEPLOYPATH=/home/YOUR_CPANEL_USERNAME/public_html
-    - export REPOPATH=/home/YOUR_CPANEL_USERNAME/repositories/webplayer
+    # Task 1: Define deployment paths
+    - export DEPLOYPATH=/home/omxfcmit/public_html
+    - export REPOPATH=/home/omxfcmit/repositories/webplayer
     
-    # Navigate to the repository directory
+    # Task 2: Navigate to repository
     - cd $REPOPATH
     
-    # Install dependencies using npm
-    # The --production flag skips development dependencies
-    - /usr/bin/npm install --production
+    # Task 3: Install dependencies
+    - /usr/bin/npm install
     
-    # Task 2: Build the React application
-    # This creates optimized production files in the 'build' folder
-    # GENERATE_SOURCEMAP=false prevents source maps from being created (saves space)
+    # Task 4: Build React application
     - export GENERATE_SOURCEMAP=false
     - /usr/bin/npm run build
     
-    # Task 3: Clean the deployment directory
-    # Remove old files from public_html (except .htaccess and other hidden files)
-    - /bin/find $DEPLOYPATH -maxdepth 1 -type f !  -name '. htaccess' !  -name '. env' ! -name '.*' -delete
-    - /bin/find $DEPLOYPATH -maxdepth 1 -type d ! -name 'cgi-bin' ! -name '.' ! -name '..' ! -name 'public_html' -exec rm -rf {} + 2>/dev/null || true
+    # Task 5: Create logs directory
+    - /bin/mkdir -p $DEPLOYPATH/logs
     
-    # Task 4: Copy built files to deployment directory
-    # This copies all files from the build folder to public_html
+    # Task 6: Backup and clean deployment directory
+    - /bin/find $DEPLOYPATH -maxdepth 1 -type f ! -name '.htaccess' ! -name 'error_log' ! -name '.*' -delete 2>/dev/null || true
+    - /bin/find $DEPLOYPATH -maxdepth 1 -type d ! -name 'cgi-bin' ! -name 'logs' ! -name '.' ! -name '..' ! -name 'public_html' -exec rm -rf {} + 2>/dev/null || true
+    
+    # Task 7: Deploy built React files from build folder
     - /bin/cp -R $REPOPATH/build/* $DEPLOYPATH/
     
-    # Task 5: Set proper permissions
-    # Ensures files are readable by the web server
-    - /bin/chmod -R 755 $DEPLOYPATH
+    # Task 8: Create error log files
+    - /bin/touch $DEPLOYPATH/logs/php_errors.log
+    - /bin/touch $DEPLOYPATH/logs/app_errors.log
+    - /bin/touch $DEPLOYPATH/logs/database_errors.log
+    - /bin/touch $DEPLOYPATH/logs/deployment.log
     
-    # Task 6: Create .htaccess for React Router support
-    # This ensures that React Router works properly with direct URL access
+    # Task 9: Log deployment
+    - echo "[$(date '+%d/%m/%Y %H:%M:%S')] Deployment completed" >> $DEPLOYPATH/logs/deployment.log
+    
+    # Task 10: Set permissions
+    - /bin/chmod -R 755 $DEPLOYPATH
+    - /bin/chmod 644 $DEPLOYPATH/*.php 2>/dev/null || true
+    - /bin/chmod 644 $DEPLOYPATH/*.js 2>/dev/null || true
+    - /bin/chmod -R 666 $DEPLOYPATH/logs/*.log 2>/dev/null || true
+    
+    # Task 11: Create .htaccess with proper configuration
     - |
       /bin/cat > $DEPLOYPATH/.htaccess << 'EOF'
-      # . htaccess for React Router
-      # Generated:  10/01/2026
+      # .htaccess for Streamity Player
+      # Generated: 11/01/2026
       
-      <IfModule mod_rewrite. c>
+      # PHP Error Logging
+      php_flag display_errors Off
+      php_flag log_errors On
+      php_value error_log /home/omxfcmit/public_html/logs/php_errors.log
+      php_value error_reporting E_ALL
+      
+      # Enable PHP
+      AddHandler application/x-httpd-php .php
+      
+      # React Router Support
+      <IfModule mod_rewrite.c>
         RewriteEngine On
         RewriteBase /
         
-        # Redirect all requests to index.html except for existing files
+        # Don't rewrite PHP files
+        RewriteCond %{REQUEST_FILENAME} !\.php$
+        
+        # Don't rewrite logs
+        RewriteCond %{REQUEST_URI} !^/logs/
+        
+        # Don't rewrite existing files
         RewriteCond %{REQUEST_FILENAME} !-f
         RewriteCond %{REQUEST_FILENAME} !-d
-        RewriteCond %{REQUEST_FILENAME} !-l
-        RewriteRule .  /index.html [L]
+        
+        # Redirect to index.html
+        RewriteRule . /index.html [L]
       </IfModule>
       
-      # Enable GZIP compression
+      # Protect logs directory
+      <DirectoryMatch "^/.*/logs/">
+        Order deny,allow
+        Deny from all
+      </DirectoryMatch>
+      
+      <FilesMatch "\.(log)$">
+        Order deny,allow
+        Deny from all
+      </FilesMatch>
+      
+      # GZIP Compression
       <IfModule mod_deflate.c>
         AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
       </IfModule>
       
-      # Set caching headers for static assets
+      # Browser Caching
       <IfModule mod_expires.c>
         ExpiresActive On
         ExpiresByType image/jpg "access plus 1 year"
         ExpiresByType image/jpeg "access plus 1 year"
         ExpiresByType image/gif "access plus 1 year"
         ExpiresByType image/png "access plus 1 year"
-        ExpiresByType image/svg+xml "access plus 1 year"
         ExpiresByType text/css "access plus 1 month"
         ExpiresByType application/javascript "access plus 1 month"
-        ExpiresByType application/pdf "access plus 1 month"
         ExpiresByType text/html "access plus 0 seconds"
+      </IfModule>
+      
+      # Security Headers
+      <IfModule mod_headers.c>
+        Header set X-Content-Type-Options "nosniff"
+        Header set X-Frame-Options "SAMEORIGIN"
+        Header set X-XSS-Protection "1; mode=block"
       </IfModule>
       EOF
