@@ -14,14 +14,14 @@ const gradientAnimation = keyframes`
         background-position: 100% 50%;
     }
     100% {
-        background-position:  0% 50%;
+        background-position: 0% 50%;
     }
 `
 
 // Float animation for the card
 const floatAnimation = keyframes`
     0%, 100% {
-        transform:  translateY(0px);
+        transform: translateY(0px);
     }
     50% {
         transform: translateY(-10px);
@@ -43,10 +43,10 @@ const Container = styled.div`
     width: 100%;
     height:  100%;
     top: 0;
-    left: 0;
+    left:  0;
     background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #533483);
     background-size: 400% 400%;
-    animation: ${gradientAnimation} 15s ease infinite;
+    animation:  ${gradientAnimation} 15s ease infinite;
     transition: all . 5s ease;
     overflow: hidden;
     display: flex;
@@ -70,8 +70,8 @@ const Container = styled.div`
         content: '';
         position: absolute;
         width:  400px;
-        height:  400px;
-        background:  radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+        height: 400px;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
         border-radius: 50%;
         bottom: -200px;
         left: -200px;
@@ -218,7 +218,7 @@ const Login = ({url}) => {
     const [password, setPassword] = useState("");
     const [showPopup, setShowPopup] = useState(false);
     const [blur, setBlur] = useState();
-    const [m3u8, setM3u8] = useState(window.m3u8warning === true  && ! Cookies.get("m3u8_play"));
+    const [m3u8, setM3u8] = useState(window.m3u8warning === true && ! Cookies.get("m3u8_play"));
 
     const history = useHistory();
     const auth = useAuth();
@@ -238,13 +238,13 @@ const Login = ({url}) => {
     const remoteController = (event) => {
         let active = document.activeElement;
         if (event.keyCode === 40 && active.nextSibling) {
-            if(active. nextSibling.tagName==="LABEL")
+            if(active.nextSibling.tagName==="LABEL")
                 active = active.nextSibling;
-            active.nextSibling. focus();
+            active.nextSibling.focus();
         } else if (event.keyCode === 38 && active.previousSibling) {
-            if(active.previousSibling.tagName==="LABEL")
+            if(active. previousSibling.tagName==="LABEL")
                 active = active.previousSibling;
-            active.previousSibling.focus();
+            active.previousSibling. focus();
         } else if (event.keyCode === 13)
             active.click();
     }
@@ -256,7 +256,7 @@ const Login = ({url}) => {
             () => window.location="/"
             ,
             (title,description) => {
-                setShowPopup({title:title,description: description});
+                setShowPopup({title: title,description:description});
             }
         )
     }
@@ -272,12 +272,12 @@ const Login = ({url}) => {
         <Container style={blur}>
             <Box onKeyDown={remoteController} onSubmit={login}>
                 <LogoContainer>
-                    <img src="/img/banner_w.png" alt={window.playername} />
+                    <img src="/img/banner_w. png" alt={window.playername} />
                 </LogoContainer>
 
                 <h5>Enter your credentials to continue</h5>
 
-                {!window.dns && (
+                {! window.dns && (
                     <InputGroup>
                         <label>Provider URL</label>
                         <Input 
@@ -288,7 +288,7 @@ const Login = ({url}) => {
                             placeholder="https://provider.com" 
                             name="dns" 
                             autoFocus 
-                            onChange={(e)=> setDns(e.target.value)} 
+                            onChange={(e)=> setDns(e.target. value)} 
                             value={dns} 
                         />
                     </InputGroup>
@@ -327,9 +327,9 @@ const Login = ({url}) => {
                 </Button>
             </Box>
         </Container>
-        {showPopup && <Popup unsecure={true} title={showPopup.title} description={showPopup.description} icon={"fas fa-user-times"}  onclick={closePopup}/>}
+        {showPopup && <Popup unsecure={true} title={showPopup.title} description={showPopup.description} icon={"fas fa-user-times"} onclick={closePopup}/>}
         {m3u8 && (
-            <Popup unsecure={true} error={false} title={"Information"} description={"To login use your IPTV playlist username and password, not your email. <br/>Web Player can play live channels streams only in M3U8 format.<br/>The conversion will be done automatically if streams are in Xtream codes format (this won't affect your playlist)."} icon={"fas fa-info-circle"} onclick={()=>  {Cookies.set("m3u8_play",1,{ expires: 365 }); setM3u8(!m3u8);}}/>
+            <Popup unsecure={true} error={false} title={"Information"} description={"To login use your IPTV playlist username and password, not your email. <br/>Web Player can play live channels streams only in M3U8 format. <br/>The conversion will be done automatically if streams are in Xtreamcodes format (this won't affect your playlist)."} icon={"fas fa-info-circle"} onclick={()=> {Cookies.set("m3u8_play",1,{ expires:  365 }); setM3u8(! m3u8);}}/>
         )}
         </>
     )
