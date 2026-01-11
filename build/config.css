@@ -1,0 +1,135 @@
+/**
+ * config.css - Streamity Player Custom Styling
+ * 
+ * Description: Custom color scheme and branding for the IPTV player.  
+ *              Change these values to customize the look of your player.
+ * 
+ * Repository: irlam/webplayer
+ * Created: 11/01/2026 (UK format:  DD/MM/YYYY)
+ * 
+ * Instructions: 
+ * - Change --main-color and --accent-color to customize your theme
+ * - Use hex color codes or CSS color names
+ * - Default theme:  Purple/Blue gradient
+ */
+
+/* ===== Theme Color Variables ===== */
+:root {
+    /* Main theme color - used for buttons, highlights, primary UI elements */
+    --main-color: #667eea;
+    
+    /* Accent color - used for gradients, hover states, secondary elements */
+    --accent-color:  #764ba2;
+    
+    /* Background color for dark sections */
+    --background-dark: #1a1a2e;
+    
+    /* Text colors */
+    --text-primary:  #ffffff;
+    --text-secondary: #b0b0b0;
+}
+
+/* ===== Main Color Classes ===== */
+/* Apply main color to text */
+. main-color {
+    color: var(--main-color) !important;
+}
+
+/* Apply gradient background */
+.main-bg {
+    background:  linear-gradient(135deg, var(--main-color) 0%, var(--accent-color) 100%) !important;
+}
+
+/* Apply solid main color background */
+.main-bg-solid {
+    background-color: var(--main-color) !important;
+}
+
+/* ===== Button Styling ===== */
+/* Primary buttons */
+button.primary,
+.btn-primary {
+    background:  linear-gradient(135deg, var(--main-color) 0%, var(--accent-color) 100%) !important;
+    border: none ! important;
+    color: var(--text-primary) !important;
+    transition: all 0.3s ease !important;
+}
+
+button. primary:hover,
+.btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+button.primary:active,
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* ===== Custom Scrollbar ===== */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--main-color) 0%, var(--accent-color) 100%);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}
+
+/* ===== Loading Spinner ===== */
+. spinner {
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid var(--main-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== Card Hover Effects ===== */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* ===== Link Styling ===== */
+a {
+    color: var(--main-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-color);
+}
+
+/* ===== Focus Outline ===== */
+*:focus {
+    outline: 2px solid var(--main-color);
+    outline-offset:  2px;
+}
+
+/* ===== Selection Color ===== */
+:: selection {
+    background: var(--main-color);
+    color: white;
+}
+
+: :-moz-selection {
+    background:  var(--main-color);
+    color: white;
+}
