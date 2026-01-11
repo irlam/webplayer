@@ -1,13 +1,13 @@
 ---
 ###############################################################################
-# .cpanel.yml - cPanel Deployment Configuration File
+# . cpanel.yml - cPanel Deployment Configuration File
 # 
-# Description:  Automates deployment of Streamity IPTV Web Player to cPanel. 
+# Description:   Automates deployment of Streamity IPTV Web Player to cPanel. 
 #              Builds the React application and deploys static files plus
 #              PHP backend to public_html root directory.
 #
-# Repository: irlam/webplayer
-# Application: Streamity.tv v2 Xtream IPTV Player
+# Repository:  irlam/webplayer
+# Application: Streamity. tv v2 Xtream IPTV Player
 # Created: 10/01/2026 (UK format: DD/MM/YYYY)
 # Updated: 11/01/2026 - Fixed file paths and deployment structure
 #
@@ -39,8 +39,9 @@ deployment:
     - /bin/mkdir -p $DEPLOYPATH/logs
     
     # Task 6: Backup and clean deployment directory
-    - /bin/find $DEPLOYPATH -maxdepth 1 -type f ! -name '.htaccess' ! -name 'error_log' ! -name '.*' -delete 2>/dev/null || true
-    - /bin/find $DEPLOYPATH -maxdepth 1 -type d ! -name 'cgi-bin' ! -name 'logs' ! -name '.' ! -name '..' ! -name 'public_html' -exec rm -rf {} + 2>/dev/null || true
+    # Keep important files:  . htaccess, logs, cgi-bin, error_log
+    - /bin/find $DEPLOYPATH -maxdepth 1 -type f !  -name '. htaccess' ! -name 'error_log' ! -name '.*' -delete 2>/dev/null || true
+    - /bin/find $DEPLOYPATH -maxdepth 1 -type d ! -name 'cgi-bin' ! -name 'logs' ! -name '.' ! -name '..' !  -name 'public_html' -exec rm -rf {} + 2>/dev/null || true
     
     # Task 7: Deploy built React files from build folder
     - /bin/cp -R $REPOPATH/build/* $DEPLOYPATH/
@@ -49,22 +50,22 @@ deployment:
     - /bin/touch $DEPLOYPATH/logs/php_errors.log
     - /bin/touch $DEPLOYPATH/logs/app_errors.log
     - /bin/touch $DEPLOYPATH/logs/database_errors.log
-    - /bin/touch $DEPLOYPATH/logs/deployment.log
+    - /bin/touch $DEPLOYPATH/logs/deployment. log
     
     # Task 9: Log deployment
     - echo "[$(date '+%d/%m/%Y %H:%M:%S')] Deployment completed" >> $DEPLOYPATH/logs/deployment.log
     
     # Task 10: Set permissions
     - /bin/chmod -R 755 $DEPLOYPATH
-    - /bin/chmod 644 $DEPLOYPATH/*.php 2>/dev/null || true
-    - /bin/chmod 644 $DEPLOYPATH/*.js 2>/dev/null || true
-    - /bin/chmod -R 666 $DEPLOYPATH/logs/*.log 2>/dev/null || true
+    - /bin/chmod 644 $DEPLOYPATH/*. php 2>/dev/null || true
+    - /bin/chmod 644 $DEPLOYPATH/*. js 2>/dev/null || true
+    - /bin/chmod -R 666 $DEPLOYPATH/logs/*. log 2>/dev/null || true
     
-    # Task 11: Create .htaccess with proper configuration
+    # Task 11: Create . htaccess with proper configuration
     - |
       /bin/cat > $DEPLOYPATH/.htaccess << 'EOF'
-      # .htaccess for Streamity Player
-      # Generated: 11/01/2026
+      # . htaccess for Streamity Player
+      # Generated:  11/01/2026
       
       # PHP Error Logging
       php_flag display_errors Off
@@ -76,26 +77,26 @@ deployment:
       AddHandler application/x-httpd-php .php
       
       # React Router Support
-      <IfModule mod_rewrite.c>
+      <IfModule mod_rewrite. c>
         RewriteEngine On
         RewriteBase /
         
         # Don't rewrite PHP files
-        RewriteCond %{REQUEST_FILENAME} !\.php$
+        RewriteCond %{REQUEST_FILENAME} !\. php$
         
         # Don't rewrite logs
         RewriteCond %{REQUEST_URI} !^/logs/
         
         # Don't rewrite existing files
-        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} ! -f
         RewriteCond %{REQUEST_FILENAME} !-d
         
         # Redirect to index.html
-        RewriteRule . /index.html [L]
+        RewriteRule .  /index.html [L]
       </IfModule>
       
       # Protect logs directory
-      <DirectoryMatch "^/.*/logs/">
+      <DirectoryMatch "^/. */logs/">
         Order deny,allow
         Deny from all
       </DirectoryMatch>
