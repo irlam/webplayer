@@ -283,7 +283,7 @@ const Login = ({url}) => {
         <Container style={blur}>
             <Box onKeyDown={remoteController} onSubmit={login}>
                 <LogoContainer>
-                    <img src="/img/banner_w. png" alt={window.playername} />
+                    <img src="/img/banner_w.png" alt={window.playername} />
                 </LogoContainer>
 
                 <h5>Enter your credentials to continue</h5>
