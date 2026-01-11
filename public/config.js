@@ -22,14 +22,14 @@
 
 /*----- Player Configuration -----*/
 // The name displayed in the browser title and header
-window.playername = "My Web Player";
+window.playername = "SMIPTV Web Player";
 
 /*----- DNS Configuration -----*/
 // CRITICAL: Your IPTV provider's DNS URL
 // Example: "http://iptv.example.com:8080" or "http://123.456.789.0:8080"
 // 
 // ⚠️ REPLACE THIS WITH YOUR ACTUAL IPTV PROVIDER URL ⚠️
-window.dns = "http://domain.com:80";
+window.dns = "https://x.3ovus.net";
 
 // If you don't have an IPTV provider yet, you can use a demo/test server
 // Or leave as is and configure later from the login screen
@@ -42,7 +42,7 @@ window.dns = "http://domain.com:80";
  * When true, the player uses proxy. php to bypass CORS restrictions.
  * If setting to true, you must also configure config.php
  */
-window.cors = false;
+window.cors = true;
 
 /*----- HTTPS Configuration -----*/
 /**
@@ -51,7 +51,7 @@ window.cors = false;
  * 
  * Most IPTV providers use HTTP (false), but some premium services use HTTPS
  */
-window.https = false;
+window.https = true;
 
 /*----- TMDB API [OPTIONAL] -----*/
 /**
@@ -64,7 +64,7 @@ window.https = false;
  * 
  * Example: window.tmdb = "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6";
  */
-window.tmdb = "";
+window.tmdb = "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6";
 
 /*----- Error Logging Configuration -----*/
 /**
@@ -84,7 +84,7 @@ window.enableErrorLogging = true;
  * Enable debug mode
  * Shows additional console messages for troubleshooting
  */
-window.debugMode = true;
+window.debugMode = false;
 
 /*----- Error Logging System -----*/
 /**

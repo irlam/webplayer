@@ -74,15 +74,15 @@ $db_url = "localhost";
 
 // Database name - CREATE THIS IN CPANEL FIRST!  
 // Example: "omxfcmit_streamity"
-$db_name = ""; // ⚠️ FILL THIS IN
+$db_name = "omxfcmit_webplayer"; // ⚠️ FILL THIS IN
 
 // Database username - CREATE THIS IN CPANEL FIRST!
 // Example: "omxfcmit_user"
-$db_username = ""; // ⚠️ FILL THIS IN
+$db_username = "omxfcmit_webplayer"; // ⚠️ FILL THIS IN
 
 // Database password - SET THIS WHEN CREATING USER IN CPANEL
 // Example: "YourSecurePassword123!"
-$db_password = ""; // ⚠️ FILL THIS IN
+$db_password = "Subaru5554346"; // ⚠️ FILL THIS IN
 
 /*----- EPG (Electronic Program Guide) Configuration -----*/
 /**
@@ -111,7 +111,7 @@ $epg_valid_hours = "+12 hours";
  * Set to true ONLY if window.cors = true in config.js
  * This must match the CORS setting in config.js
  */
-$cors = false;
+$cors = true;
 
 /**
  * DNS URL - MUST MATCH window.dns in config.js
@@ -119,7 +119,7 @@ $cors = false;
  * 
  * Example: "http://iptv.example.com:8080"
  */
-$dns = "http://domain.com:80"; // ⚠️ MUST MATCH config.js
+$dns = "https://x.3ovus.net"; // ⚠️ MUST MATCH config.js
 
 /*----- Configuration Validation -----*/
 /**
