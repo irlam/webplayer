@@ -22,7 +22,7 @@
 
 /*----- Player Configuration -----*/
 // The name displayed in the browser title and header
-window.playername = "My Web Player";
+window.playername = "SMIPTV Web Player";
 
 /*----- DNS Configuration -----*/
 // CRITICAL: Your IPTV provider's DNS URL
