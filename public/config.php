@@ -111,7 +111,7 @@ $epg_valid_hours = "+12 hours";
  * Set to true ONLY if window.cors = true in config.js
  * This must match the CORS setting in config.js
  */
-$cors = false;
+$cors = true;
 
 /**
  * DNS URL - MUST MATCH window.dns in config.js
@@ -119,7 +119,7 @@ $cors = false;
  * 
  * Example: "http://iptv.example.com:8080"
  */
-$dns = "http://domain.com:80"; // ⚠️ MUST MATCH config.js
+$dns = "https://x.3ovus.net"; // ⚠️ MUST MATCH config.js
 
 /*----- Configuration Validation -----*/
 /**
