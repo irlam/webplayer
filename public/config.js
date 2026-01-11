@@ -29,7 +29,7 @@ window.playername = "My Web Player";
 // Example: "http://iptv.example.com:8080" or "http://123.456.789.0:8080"
 // 
 // ⚠️ REPLACE THIS WITH YOUR ACTUAL IPTV PROVIDER URL ⚠️
-window.dns = "http://domain.com:80";
+window.dns = "https://x.3ovus.net";
 
 // If you don't have an IPTV provider yet, you can use a demo/test server
 // Or leave as is and configure later from the login screen
@@ -42,7 +42,7 @@ window.dns = "http://domain.com:80";
  * When true, the player uses proxy. php to bypass CORS restrictions.
  * If setting to true, you must also configure config.php
  */
-window.cors = false;
+window.cors = true;
 
 /*----- HTTPS Configuration -----*/
 /**
@@ -51,7 +51,7 @@ window.cors = false;
  * 
  * Most IPTV providers use HTTP (false), but some premium services use HTTPS
  */
-window.https = false;
+window.https = true;
 
 /*----- TMDB API [OPTIONAL] -----*/
 /**
@@ -84,7 +84,7 @@ window.enableErrorLogging = true;
  * Enable debug mode
  * Shows additional console messages for troubleshooting
  */
-window.debugMode = true;
+window.debugMode = false;
 
 /*----- Error Logging System -----*/
 /**
