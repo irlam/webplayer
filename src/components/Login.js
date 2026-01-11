@@ -6,7 +6,7 @@
  * 
  * Repository: irlam/webplayer
  * Created: 11/01/2026 (UK format:  DD/MM/YYYY)
- * Last Modified: 11/01/2026 - Fixed infinite redirect loop
+ * Last Modified: 11/01/2026 - Fixed logo 404 error
  */
 
 import React, {useState,useRef,useEffect} from 'react'
@@ -54,10 +54,10 @@ const Container = styled.div`
     width: 100%;
     height:  100%;
     top: 0;
-    left:  0;
+    left: 0;
     background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #533483);
     background-size: 400% 400%;
-    animation:  ${gradientAnimation} 15s ease infinite;
+    animation: ${gradientAnimation} 15s ease infinite;
     transition: all . 5s ease;
     overflow: hidden;
     display: flex;
@@ -127,7 +127,7 @@ const Box = styled.form`
     & > label {
         color: rgba(255, 255, 255, 0.9);
         font-weight: 500;
-        margin-bottom: 0.5rem;
+        margin-bottom:  0.5rem;
         display: block;
         font-size: 0.95rem;
         letter-spacing: 0.5px;
@@ -150,7 +150,7 @@ const LogoContainer = styled.div`
         }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width:  768px) {
         img {
             max-width: 80%;
             max-height: 100px;
@@ -164,7 +164,7 @@ const Input = styled.input`
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: white ! important;
     padding: 0.85rem 1.2rem;
-    border-radius: 12px;
+    border-radius:  12px;
     font-size: 1rem;
     transition: all 0.3s ease;
     width: 100%;
@@ -204,11 +204,11 @@ const Button = styled.button`
     &:hover {
         background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+        box-shadow:  0 6px 20px rgba(139, 92, 246, 0.6);
     }
 
     &:active {
-        transform:  translateY(0px);
+        transform: translateY(0px);
         box-shadow: 0 2px 10px rgba(139, 92, 246, 0.4);
     }
 
