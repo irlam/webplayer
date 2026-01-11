@@ -74,15 +74,15 @@ $db_url = "localhost";
 
 // Database name - CREATE THIS IN CPANEL FIRST!  
 // Example: "omxfcmit_streamity"
-$db_name = ""; // ⚠️ FILL THIS IN
+$db_name = "omxfcmit_webplayer"; // ⚠️ FILL THIS IN
 
 // Database username - CREATE THIS IN CPANEL FIRST!
 // Example: "omxfcmit_user"
-$db_username = ""; // ⚠️ FILL THIS IN
+$db_username = "omxfcmit_webplayer"; // ⚠️ FILL THIS IN
 
 // Database password - SET THIS WHEN CREATING USER IN CPANEL
 // Example: "YourSecurePassword123!"
-$db_password = ""; // ⚠️ FILL THIS IN
+$db_password = "Subaru5554346"; // ⚠️ FILL THIS IN
 
 /*----- EPG (Electronic Program Guide) Configuration -----*/
 /**
